@@ -1,7 +1,6 @@
 # apt-zabbix-monitoring
 
-This project provides a simple way to monitor available Debian/Ubuntu package updates (including security updates) with **Zabbix 7.2**.  
-It installs the required configuration files for the Zabbix Agent2 and apt periodic jobs, and provides a ready-to-use Zabbix template.
+This project provides a simple way to monitor available Debian/Ubuntu package updates (including security updates) with **Zabbix 7.2**. It installs the required configuration files for the Zabbix Agent2 and apt periodic jobs, and provides a ready-to-use Zabbix template.
 
 ---
 
