@@ -1,0 +1,117 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<zabbix_export>
+    <version>7.2</version>
+    <template_groups>
+        <template_group>
+            <uuid>7df96b18c230490a9a0a9e2307226338</uuid>
+            <name>Templates</name>
+        </template_group>
+    </template_groups>
+    <templates>
+        <template>
+            <uuid>ab900107205f48a5a79f6e83aaf610b9</uuid>
+            <template>Template App APT Updates</template>
+            <name>Template App APT Updates</name>
+            <groups>
+                <group>
+                    <name>Templates</name>
+                </group>
+            </groups>
+            <items>
+                <item>
+                    <uuid>9e656dc7f2f94e31b95140e105526bb3</uuid>
+                    <name>Non-Critical Distribution Updates (incl. Kernel)</name>
+                    <key>apt.dist-upgrade</key>
+                    <delay>900</delay>
+                    <history>90d</history>
+                    <tags>
+                        <tag>
+                            <tag>Application</tag>
+                            <value>APT</value>
+                        </tag>
+                    </tags>
+                    <triggers>
+                        <trigger>
+                            <uuid>db7be4d1a1844195b1f012d9c584abe2</uuid>
+                            <expression>last(/Template App APT Updates/apt.dist-upgrade)&gt;0</expression>
+                            <name>{ITEM.LASTVALUE} regular distribution updates on {HOST.NAME}</name>
+                            <priority>INFO</priority>
+                            <manual_close>YES</manual_close>
+                        </trigger>
+                    </triggers>
+                </item>
+                <item>
+                    <uuid>2e6b9f855981498e9bbcc95658f8e55d</uuid>
+                    <name>Reboot Required regarding apt System Updates</name>
+                    <key>apt.reboot</key>
+                    <delay>900</delay>
+                    <history>90d</history>
+                    <tags>
+                        <tag>
+                            <tag>Application</tag>
+                            <value>APT</value>
+                        </tag>
+                    </tags>
+                    <triggers>
+                        <trigger>
+                            <uuid>5e9f60f5f9ba4232864ee4300433f878</uuid>
+                            <expression>last(/Template App APT Updates/apt.reboot)&gt;0</expression>
+                            <name>Reboot required on {HOST.NAME} regarding apt System updates</name>
+                            <priority>WARNING</priority>
+                            <manual_close>YES</manual_close>
+                        </trigger>
+                    </triggers>
+                </item>
+                <item>
+                    <uuid>7e25def970a84995b72a546bdb02c5c5</uuid>
+                    <name>Security Updates</name>
+                    <key>apt.security</key>
+                    <delay>900</delay>
+                    <history>90d</history>
+                    <tags>
+                        <tag>
+                            <tag>Application</tag>
+                            <value>APT</value>
+                        </tag>
+                    </tags>
+                </item>
+                <item>
+                    <uuid>61b656de95544835984db066a375465a</uuid>
+                    <name>Non-Critical System Updates</name>
+                    <key>apt.updates</key>
+                    <delay>900</delay>
+                    <history>90d</history>
+                    <tags>
+                        <tag>
+                            <tag>Application</tag>
+                            <value>APT</value>
+                        </tag>
+                    </tags>
+                </item>
+            </items>
+        </template>
+    </templates>
+    <triggers>
+        <trigger>
+            <uuid>e2fdafc15f5b4d5da61b2bbdadcb1735</uuid>
+            <expression>last(/Template App APT Updates/apt.security)&gt;0 and last(/Template App APT Updates/apt.updates)&gt;0</expression>
+            <name>{ITEM.LASTVALUE1} security and {ITEM.LASTVALUE2} regular updates on {HOST.NAME}</name>
+            <priority>WARNING</priority>
+            <manual_close>YES</manual_close>
+        </trigger>
+        <trigger>
+            <uuid>61d9a47e71914a21ab18499d2fe1f4c2</uuid>
+            <expression>last(/Template App APT Updates/apt.updates)&gt;0 and last(/Template App APT Updates/apt.security)=0</expression>
+            <name>{ITEM.LASTVALUE} regular system updates on {HOST.NAME}</name>
+            <priority>INFO</priority>
+            <manual_close>YES</manual_close>
+        </trigger>
+        <trigger>
+            <uuid>c1083010fed846a199220a0685a7e998</uuid>
+            <expression>last(/Template App APT Updates/apt.security)&gt;0 and last(/Template App APT Updates/apt.updates)=0</expression>
+            <name>{ITEM.LASTVALUE} security updates on {HOST.NAME}</name>
+            <priority>WARNING</priority>
+            <manual_close>YES</manual_close>
+        </trigger>
+    </triggers>
+</zabbix_export>
