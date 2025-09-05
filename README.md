@@ -10,8 +10,7 @@ It installs the required configuration files for the Zabbix Agent2 and apt perio
 Run the following command on your Debian/Ubuntu host:
 
 ```bash
-wget https://raw.githubusercontent.com/pthoelken/apt-zabbix-monitoring/refs/heads/main/install.sh -O install_apt_zabbix_monitoring.sh
-bash install_apt_zabbix_monitoring.sh
+wget https://raw.githubusercontent.com/pthoelken/apt-zabbix-monitoring/refs/heads/main/install.sh -O install_apt_zabbix_monitoring.sh ; bash install_apt_zabbix_monitoring.sh ;
 ```
 
 The script will:
