@@ -5,7 +5,7 @@
 set -o pipefail
 
 # -------------------- Fixed configuration --------------------
-REPO_URL="https://example.com/your/repo.git"   # <-- set your repo URL here
+REPO_URL="https://github.com/pthoelken/apt-zabbix-monitoring.git"   # <-- set your repo URL here
 REPO_BRANCH="main"
 
 DEST_ZBX_DIR="/etc/zabbix/zabbix_agent2.d"
