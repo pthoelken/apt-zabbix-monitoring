@@ -39,7 +39,7 @@ After installation, you must import the template:
 
 1. Go to **Configuration → Templates** in Zabbix 7.2.
 2. Click **Import**.
-3. Select the file [`templates/zbx_export_templates.xml`](templates/zbx_export_templates.xml).
+3. Select the file [`templates/zbx_export_templates_7.X.xml`](templates/).
 4. Attach the template to your host(s).
 
 ---
@@ -48,7 +48,7 @@ After installation, you must import the template:
 
 - Automatic detection of available Debian/Ubuntu updates
 - Differentiation between **security updates** and **non-security updates**
-- Ready-to-use template for Zabbix 7.2
+- Ready-to-use template for Zabbix 7.2 and LTS 7.0
 - Minimal system overhead (lightweight Bash + apt commands)
 
 ---
