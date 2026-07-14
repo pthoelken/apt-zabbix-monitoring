@@ -1,17 +1,17 @@
 zabbix_export:
-  version: '7.4'
+  version: "7.4"
   template_groups:
     - uuid: 0b381a46614340d49124dc405fa4f3d8
       name: Templates
   templates:
     - uuid: ab900107205f48a5a79f6e83aaf610b9
-      template: 'Template App APT Updates'
-      name: 'Template App APT Updates'
+      template: "Template App APT Updates"
+      name: "Template App APT Updates"
       groups:
         - name: Templates
       items:
         - uuid: d96f300355ec41dfbe2b96b49651cf90
-          name: 'Packages marked as removable'
+          name: "Packages marked as removable"
           key: apt.autoremove
           delay: 300s
           history: 90d
@@ -20,12 +20,12 @@ zabbix_export:
               value: APT
           triggers:
             - uuid: 61d9a47e71914a21ab18499d2fe1f4c2
-              expression: 'last(/Template App APT Updates/apt.autoremove)>0'
-              name: '{ITEM.LASTVALUE} packages marked as removable on {HOST.NAME}'
+              expression: "last(/Template App APT Updates/apt.autoremove)>0"
+              name: "{ITEM.LASTVALUE} packages marked as removable on {HOST.NAME}"
               priority: INFO
-              manual_close: 'YES'
+              manual_close: "YES"
         - uuid: 9e656dc7f2f94e31b95140e105526bb3
-          name: 'Non-Critical Distribution Updates (incl. Kernel)'
+          name: "Non-Critical Distribution Updates (incl. Kernel)"
           key: apt.dist-upgrade
           delay: 300s
           history: 90d
@@ -34,12 +34,12 @@ zabbix_export:
               value: APT
           triggers:
             - uuid: db7be4d1a1844195b1f012d9c584abe2
-              expression: 'last(/Template App APT Updates/apt.dist-upgrade)>0'
-              name: '{ITEM.LASTVALUE} regular distribution updates on {HOST.NAME}'
+              expression: "last(/Template App APT Updates/apt.dist-upgrade)>0"
+              name: "{ITEM.LASTVALUE} regular distribution updates on {HOST.NAME}"
               priority: INFO
-              manual_close: 'YES'
+              manual_close: "YES"
         - uuid: 2e6b9f855981498e9bbcc95658f8e55d
-          name: 'Reboot Required regarding apt System Updates'
+          name: "Reboot Required regarding apt System Updates"
           key: apt.reboot
           delay: 300s
           history: 90d
@@ -48,34 +48,35 @@ zabbix_export:
               value: APT
           triggers:
             - uuid: 5e9f60f5f9ba4232864ee4300433f878
-              expression: 'last(/Template App APT Updates/apt.reboot)>0'
-              name: 'Reboot required on {HOST.NAME} regarding apt System updates'
+              expression: "last(/Template App APT Updates/apt.reboot)>0"
+              name: "Reboot required on {HOST.NAME} regarding apt System updates"
               priority: WARNING
-              manual_close: 'YES'
+              manual_close: "YES"
         - uuid: 7e25def970a84995b72a546bdb02c5c5
-          name: 'Security Updates'
+          name: "Security Updates"
           key: apt.security
           delay: 300s
           history: 90d
           tags:
             - tag: Application
               value: APT
+          triggers:
+            - uuid: c1083010fed846a199220a0685a7e998
+              expression: "last(/Template App APT Updates/apt.security)>0"
+              name: "{ITEM.LASTVALUE} security updates on {HOST.NAME}"
+              priority: WARNING
+              manual_close: "YES"
         - uuid: 61b656de95544835984db066a375465a
-          name: 'Non-Critical System Updates'
+          name: "Non-Critical System Updates"
           key: apt.updates
           delay: 300s
           history: 90d
           tags:
             - tag: Application
               value: APT
-  triggers:
-    - uuid: e2fdafc15f5b4d5da61b2bbdadcb1735
-      expression: 'last(/Template App APT Updates/apt.security)>0 or last(/Template App APT Updates/apt.updates)>0'
-      name: '{ITEM.LASTVALUE1} security and {ITEM.LASTVALUE2} regular updates on {HOST.NAME}'
-      priority: WARNING
-      manual_close: 'YES'
-    - uuid: c1083010fed846a199220a0685a7e998
-      expression: 'last(/Template App APT Updates/apt.security)>0 and last(/Template App APT Updates/apt.updates)=0'
-      name: '{ITEM.LASTVALUE} security updates on {HOST.NAME}'
-      priority: WARNING
-      manual_close: 'YES'
+          triggers:
+            - uuid: a9563cff68a240978f6c11d917f61233
+              expression: "last(/Template App APT Updates/apt.updates)>0"
+              name: "{ITEM.LASTVALUE} regular updates on {HOST.NAME}"
+              priority: WARNING
+              manual_close: "YES"
