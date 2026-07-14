@@ -29,7 +29,6 @@ zabbix_export:
           key: apt.dist-upgrade
           delay: 300s
           history: 90d
-          status: DISABLED
           tags:
             - tag: Application
               value: APT
@@ -71,7 +70,7 @@ zabbix_export:
               value: APT
   triggers:
     - uuid: e2fdafc15f5b4d5da61b2bbdadcb1735
-      expression: 'last(/Template App APT Updates/apt.security)>0 and last(/Template App APT Updates/apt.updates)>0'
+      expression: 'last(/Template App APT Updates/apt.security)>0 or last(/Template App APT Updates/apt.updates)>0'
       name: '{ITEM.LASTVALUE1} security and {ITEM.LASTVALUE2} regular updates on {HOST.NAME}'
       priority: WARNING
       manual_close: 'YES'
